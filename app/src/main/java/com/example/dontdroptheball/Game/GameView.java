@@ -2,6 +2,7 @@ package com.example.dontdroptheball.Game;
 
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
@@ -17,7 +18,8 @@ import com.example.dontdroptheball.R;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private MainThread thread;
-    private CharacterSprite characterSprite;
+    private CharacterSprite ball;
+    private Slider slider;
 
     public GameView(Context context) {
         super(context);
@@ -38,14 +40,32 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
+        int eventAction = event.getAction();
 
-        return super.onTouchEvent(event);
+        // you may need the x/y location
+        int x = (int)event.getX();
+
+        // put your code in here to handle the event
+        switch (eventAction) {
+            case MotionEvent.ACTION_DOWN:
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+            case MotionEvent.ACTION_MOVE:
+                slider.slide(x);
+        }
+
+        // tell the View to redraw the Canvas
+        invalidate();
+
+        // tell the View that we handled the event
+        return true;
     }
-
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        characterSprite = new CharacterSprite(BitmapFactory.decodeResource(getResources(),R.drawable.pikachu));
+        ball = new Ball(BitmapFactory.decodeResource(getResources(),R.drawable.redball));
+        slider = new Slider(BitmapFactory.decodeResource(getResources(),R.drawable.sliderbar));
 
 
         thread.setRunning(true);
@@ -69,7 +89,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void update() {
-        characterSprite.update();
+        ball.update();
+
+        slider.update();
 
     }
 
@@ -79,9 +101,20 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
         super.draw(canvas);
         if(canvas!=null) {
-            characterSprite.draw(canvas);
-
+            ball.draw(canvas);
+            slider.draw(canvas);
         }
+    }
+
+    public void changeBallColor(BallColor color){
+        if (color == BallColor.RED){
+            ball = new Ball(BitmapFactory.decodeResource(getResources(),R.drawable.redball));
+        } else if (color == BallColor.BLUE){
+            ball = new Ball(BitmapFactory.decodeResource(getResources(),R.drawable.blueball));
+        } else if (color == BallColor.GREEN){
+            ball = new Ball(BitmapFactory.decodeResource(getResources(),R.drawable.greenball));
+        }
+
     }
 
 
