@@ -1,13 +1,10 @@
 package com.example.dontdroptheball.Game;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
-
-import com.example.dontdroptheball.R;
 
 public class GameActivity extends Activity {
 
@@ -18,4 +15,12 @@ public class GameActivity extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(new GameView(this));
     }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+    }
+
+
+
 }

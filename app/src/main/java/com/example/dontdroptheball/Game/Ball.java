@@ -6,8 +6,9 @@ import android.graphics.BitmapFactory;
 import com.example.dontdroptheball.R;
 
 public class Ball extends CharacterSprite {
-    private int xVelocity = 10;
-    private int yVelocity = 5;
+    private int xVelocity = 18;
+    private int yVelocity = 18;
+    private boolean belowSlider = false;
 
     public Ball(Bitmap bmp) {
         super(bmp);
@@ -16,18 +17,36 @@ public class Ball extends CharacterSprite {
 
     }
 
+    public int getX(){
+        return this.x;
+    }
+
+    public void bounce(){
+        this.yVelocity *= -1;
+        this.yVelocity += 3;
+        this.xVelocity += 3;
+    }
+
+    public boolean isBelowSlider(){
+        return belowSlider;
+    }
+
 
     @Override
     public void update() {
-
+        belowSlider = false;
 
         x += xVelocity;
         y += yVelocity;
         if ((x > screenWidth - image.getWidth()) || (x < 0)) {
             xVelocity = xVelocity * -1;
         }
-        if ((y > screenHeight - image.getHeight()) || (y < 0)) {
+        if (y < 0){
             yVelocity = yVelocity * -1;
+        }
+
+        if (y > 1574){
+            belowSlider = true;
         }
 
     }

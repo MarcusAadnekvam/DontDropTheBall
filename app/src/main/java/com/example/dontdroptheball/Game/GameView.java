@@ -1,16 +1,23 @@
 package com.example.dontdroptheball.Game;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
 
 
+import com.example.dontdroptheball.LoseActivity;
 import com.example.dontdroptheball.R;
+
+import static com.example.dontdroptheball.Game.MainThread.canvas;
 
 /**
  * Created by rushd on 7/5/2017.
@@ -18,8 +25,10 @@ import com.example.dontdroptheball.R;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private MainThread thread;
-    private CharacterSprite ball;
+    private Ball ball;
     private Slider slider;
+    private int score = 0;
+    Context context;
 
     public GameView(Context context) {
         super(context);
@@ -29,6 +38,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         thread = new MainThread(getHolder(), this);
 
         setFocusable(true);
+
+        this.context = context;
 
     }
 
@@ -70,7 +81,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
         thread.setRunning(true);
         thread.start();
-
     }
 
     @Override
@@ -90,8 +100,19 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     public void update() {
         ball.update();
-
         slider.update();
+
+        if (ball.isBelowSlider()){
+            if (ball.getX() < slider.getLeftX() || ball.getX() > slider.getRightX()){
+                ((Activity) context).finish();
+                //canvas = null;
+                //Intent intent = new Intent(context, LoseActivity.class);
+                //context.startActivity(intent);
+            } else{
+                ball.bounce();
+                score ++;
+            }
+        }
 
     }
 
@@ -101,9 +122,19 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
         super.draw(canvas);
         if(canvas!=null) {
+            displayScore();
             ball.draw(canvas);
             slider.draw(canvas);
         }
+    }
+
+    private void displayScore(){
+        Paint paint = new Paint();
+        canvas.drawPaint(paint);
+        paint.setColor(Color.RED);
+        paint.setTextSize(100);
+        String text = "Score: " + Integer.toString(score);
+        canvas.drawText(text, 1080/2-100, 200, paint);
     }
 
     public void changeBallColor(BallColor color){

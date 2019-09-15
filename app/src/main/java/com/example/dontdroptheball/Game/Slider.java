@@ -19,6 +19,18 @@ public class Slider extends CharacterSprite {
 
     }
 
+    public int getTopY(){
+        return 1600 + image.getHeight();
+    }
+
+    public int getLeftX(){
+        return this.x;
+   }
+
+    public int getRightX(){
+        return this.x + 347;
+    }
+
     public void slide(int x){
         this.x = x - 347 / 2;
     }
