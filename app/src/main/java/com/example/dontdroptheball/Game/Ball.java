@@ -22,9 +22,9 @@ public class Ball extends CharacterSprite {
     }
 
     public void bounce(){
-        this.yVelocity *= -1;
-        this.yVelocity += 3;
-        this.xVelocity += 3;
+        //this.yVelocity *= -1;
+        this.yVelocity *= -1.1;
+        this.xVelocity *= 1.1;
     }
 
     public boolean isBelowSlider(){
