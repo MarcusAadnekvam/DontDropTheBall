@@ -28,6 +28,7 @@ import static com.example.dontdroptheball.Game.MainThread.canvas;
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private MainThread thread;
     private Ball ball;
+    private BallColor ballColor;
     private Slider slider;
     private int score = 0;
     Context context;
@@ -42,6 +43,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         setFocusable(true);
 
         this.context = context;
+
+        setBallColor();
 
     }
 
@@ -77,7 +80,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        ball = new Ball(BitmapFactory.decodeResource(getResources(),R.drawable.redball));
+        setBallColor();
         slider = new Slider(BitmapFactory.decodeResource(getResources(),R.drawable.sliderbar));
 
 
@@ -161,6 +164,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 
+    //Saves score and highscore to SharedPreferences
     public void setScore(){
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
@@ -178,13 +182,22 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         editor.commit();
     }
 
-    public void changeBallColor(BallColor color){
-        if (color == BallColor.RED){
-            ball = new Ball(BitmapFactory.decodeResource(getResources(),R.drawable.redball));
-        } else if (color == BallColor.BLUE){
+    public void setBallColor(){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        String ballColor = prefs.getString("BallColor", "red");
+
+        //if(!(preferences.contains("BallColor"))){
+        //    ball = new Ball(BitmapFactory.decodeResource(getResources(),R.drawable.redball));
+        //    return;
+        //}
+
+        if (ballColor == "blue"){
             ball = new Ball(BitmapFactory.decodeResource(getResources(),R.drawable.blueball));
-        } else if (color == BallColor.GREEN){
+        } else if (ballColor == "green"){
             ball = new Ball(BitmapFactory.decodeResource(getResources(),R.drawable.greenball));
+        } else {
+            ball = new Ball(BitmapFactory.decodeResource(getResources(),R.drawable.redball));
         }
 
     }

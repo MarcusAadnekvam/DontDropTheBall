@@ -26,15 +26,44 @@
         android:text="Play!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.995" />
+
+    <Button
+        android:id="@+id/shopButton"
+        android:layout_width="157dp"
+        android:layout_height="84dp"
+        android:text="Shop"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:layout_width="fill_parent"
+        android:id="@+id/imageView"
+        android:layout_width="78dp"
+        android:layout_height="69dp"
+        android:src="@drawable/frontpage"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/textView4"
+        app:layout_constraintHorizontal_bias="0.846"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.441" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/pikachu"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:text="Games!"
+        android:textSize="50sp"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.607" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

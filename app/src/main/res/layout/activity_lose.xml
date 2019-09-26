@@ -6,6 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".LoseActivity">
 
+    <Button
+        android:id="@+id/playAgainButton"
+        android:layout_width="157dp"
+        android:layout_height="84dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="60dp"
+        android:text="Play again!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.076"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/mainMenuButton"
+        android:layout_width="157dp"
+        android:layout_height="84dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="60dp"
+        android:text="Main menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toEndOf="@+id/button" />
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -43,4 +69,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/finalScore"
         app:layout_constraintVertical_bias="0.192" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,7 +15,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
-    private Button button;
+    private Button playButton;
+    private Button shopButton;
     public static final String MY_PREFS = "MyPrefsFile";
 
 
@@ -24,10 +25,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button =(Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener(){
+        playButton =(Button) findViewById(R.id.button);
+        playButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 launchGame();
+            }
+        });
+
+        shopButton = (Button) findViewById(R.id.shopButton);
+        shopButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                launchShop();
             }
         });
 
@@ -37,6 +45,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void launchGame(){
         Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
+    }
+
+    private void launchShop(){
+        Intent intent = new Intent(this, ShopActivity.class);
         startActivity(intent);
     }
 }
